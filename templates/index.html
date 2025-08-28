@@ -1,0 +1,75 @@
+Game page using server-rendered state, accessible forms, and history 
+{% extends "base.html" %}
+
+{% block live %}
+{{ message }}
+{% endblock %}
+
+{% block content %}
+  <div class="status">
+    <div class="badge {% if status == 'won' %}badge-success{% elif status == 'lost' %}badge-danger{% else %}badge-info{% endif %}">
+      {% if status == "won" %}You won!{% elif status == "lost" %}Game over{% else %}Keep guessing{% endif %}
+    </div>
+    <p class="message">{{ message }}</p>
+    {% if error %}
+      <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+  </div>
+
+  <form method="post" class="guess-form">
+    <label for="guess" class="label">Your guess</label>
+    <input
+      id="guess"
+      name="guess"
+      type="number"
+      inputmode="numeric"
+      min="1"
+      max="100"
+      class="input"
+      placeholder="Enter a number 1–100"
+      {% if status != "playing" %}disabled{% endif %}
+      required
+      aria-describedby="guess-help"
+    />
+    <small id="guess-help" class="muted">
+      Attempts: {{ attempts }}/{{ max_attempts }} • Remaining: {{ remaining }}
+    </small>
+
+    <div class="actions">
+      <button class="btn btn-primary" type="submit" {% if status != "playing" %}disabled{% endif %}>
+        Submit Guess
+      </button>
+
+      <form method="post" action="{{ url_for('reset') }}">
+         Note: nested forms are not valid HTML; we render a second form below instead 
+      </form>
+    </div>
+  </form>
+
+  <form method="post" action="{{ url_for('reset') }}" class="reset-form">
+    <button class="btn btn-ghost" type="submit">
+      {% if status == "playing" %}Reset Game{% else %}New Game{% endif %}
+    </button>
+  </form>
+
+  <div class="history">
+    <h2 class="section-title">Guess History</h2>
+    {% if history and history|length > 0 %}
+      <ul class="history-list">
+        {% for item in history|reverse %}
+          <li class="history-item">
+            <span class="mono">#{{ loop.revindex }}</span>
+            <span class="pill {% if item.result == 'correct' %}pill-success{% elif item.result == 'low' %}pill-info{% else %}pill-warning{% endif %}">
+              {{ item.guess }}
+            </span>
+            <span class="muted">
+              {% if item.result == "correct" %}correct{% elif item.result == "low" %}too low{% else %}too high{% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No guesses yet. Take your first shot.</p>
+    {% endif %}
+  </div>
+{% endblock %}

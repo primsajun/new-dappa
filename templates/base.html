@@ -1,0 +1,33 @@
+Base HTML layout for the Flask app with accessible, responsive structure 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1 class="title text-balance">Number Guessing Game</h1>
+        <p class="subtitle">Guess the secret number between 1 and 100.</p>
+      </header>
+
+      <section aria-live="polite" class="sr-only">
+        {% block live %}{% endblock %}
+      </section>
+
+      <section class="card">
+        {% block content %}{% endblock %}
+      </section>
+
+      <footer class="footer">
+        <p class="muted">Built with Flask • Server-rendered • Accessible</p>
+      </footer>
+    </main>
+  </body>
+</html>
