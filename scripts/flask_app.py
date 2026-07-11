@@ -19,7 +19,7 @@ def create_app():
     def index():
         if "target" not in session:
             new_game()
-
+ 
         message = session.get("message", "I am thinking of a number between 1 and 100.")
         status = session.get("status", "playing")
         error = None
