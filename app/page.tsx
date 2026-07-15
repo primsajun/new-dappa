@@ -112,7 +112,7 @@ export default function NumberGuessingGame() {
             )}
           </div>
 
-          {/* Input Section */}
+
           {gameStatus === "playing" && (
             <div className="space-y-3">
               <Input
