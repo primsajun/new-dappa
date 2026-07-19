@@ -36,13 +36,13 @@ export default function NumberGuessingGame() {
     setGuessHistory([])
   }
 
-  const handleGuess = () => {
-    const guessNumber = Number.parseInt(guess)
+  // const handleGuess = () => {
+  //   const guessNumber = Number.parseInt(guess)
 
-    if (isNaN(guessNumber) || guessNumber < 1 || guessNumber > 100) {
-      setFeedback("Please enter a valid number between 1 and 100!")
-      return
-    }
+  //   if (isNaN(guessNumber) || guessNumber < 1 || guessNumber > 100) {
+  //     setFeedback("Please enter a valid number between 1 and 100!")
+  //     return
+  //   }
 
     const newAttempts = attempts + 1
     setAttempts(newAttempts)
