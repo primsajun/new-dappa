@@ -18,7 +18,7 @@ export default function NumberGuessingGame() {
   const [guessHistory, setGuessHistory] = useState<number[]>([])
   const maxAttempts = 10
 
-  // Initialize game
+  Initialize game
   useEffect(() => {
     resetGame()
   }, [])
