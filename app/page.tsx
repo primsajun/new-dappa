@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { RefreshCw, Target, Trophy } from "lucide-react"
-
+ 
 export default function NumberGuessingGame() {
   const [targetNumber, setTargetNumber] = useState<number>(0)
   const [guess, setGuess] = useState<string>("")
